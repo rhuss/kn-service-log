@@ -101,7 +101,7 @@ run() {
   go_build
   go_test
 
-  echo "────────────────────────────────────────────"
+  ## echo "────────────────────────────────────────────"
   # ./$PLUGIN version
 }
 
@@ -171,7 +171,7 @@ go_test() {
 
 check_license() {
   echo "⚖️ ${S}License"
-  local required_keywords=("Authors" "Apache License" "LICENSE-2.0")
+  local required_keywords=("Apache License" "LICENSE-2.0")
   local extensions_to_check=("sh" "go" "yaml" "yml" "json")
 
   local check_output=$(mktemp /tmp/${PLUGIN}-licence-check.XXXXXX)
@@ -203,7 +203,7 @@ update_deps() {
 
 watch() {
     local command="./hack/build.sh --fast"
-    local fswatch_opts="-se \"^\..*$\" -o $SOURCE_DIRS"
+    local fswatch_opts="-e \"^\..*$\" -o $SOURCE_DIRS"
     if $(has_flag --test -t); then
       command="$command --test"
     fi
