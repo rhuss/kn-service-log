@@ -17,7 +17,7 @@ package plugin
 import (
 	"knative.dev/client/pkg/kn/plugin"
 
-	"rhuss/kn-service-log/pkg"
+	"github.com/rhuss/kn-service-log/pkg"
 )
 
 func Init() {

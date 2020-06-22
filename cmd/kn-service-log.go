@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"rhuss/kn-service-log/pkg"
+	"github.com/rhuss/kn-service-log/pkg"
 )
 
 func main() {
