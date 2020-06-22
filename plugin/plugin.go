@@ -29,7 +29,7 @@ func init() {
 type logPlugin struct {}
 
 func (l *logPlugin) Name() string {
-	return "kn-service-log"
+	return "kn service log"
 }
 
 func (l *logPlugin) Execute(args []string) error {
@@ -38,7 +38,7 @@ func (l *logPlugin) Execute(args []string) error {
 	defer (func() {
 		os.Args = oldArgs
 	})()
-	os.Args = append([]string { "kn service log" }, args...)
+	os.Args = append([]string { "kn-service-log" }, args...)
 	return cmd.Execute()
 }
 
