@@ -38,7 +38,7 @@ func (l *logPlugin) Execute(args []string) error {
 	defer (func() {
 		os.Args = oldArgs
 	})()
-	os.Args = append([]string { "kn-service-log" }, args...)
+	os.Args = append([]string { "kn service log" }, args...)
 	return cmd.Execute()
 }
 
