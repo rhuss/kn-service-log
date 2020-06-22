@@ -35,9 +35,9 @@ import (
 
 func NewLogCommand() *cobra.Command {
 	var cmd = &cobra.Command{
-		Use:   "kn-service-log NAME",
-		Short: "print the logs for a service",
-		Long: `print the logs for a service
+		Use:   "kn service log NAME",
+		Short: "Print the logs for a service",
+		Long: `Print the logs for a service
 
 Requires a connection to a Kubernetes cluster
 `,
