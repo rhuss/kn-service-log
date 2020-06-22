@@ -40,7 +40,7 @@ func (l *logPlugin) Description() (string, error) {
 }
 
 func (l *logPlugin) CommandParts() []string {
-	return []string{ "service", "logs" }
+	return []string{ "service", "log" }
 }
 
 // Path is empty because its an internal plugins
