@@ -15,6 +15,8 @@
 package plugin
 
 import (
+	"os"
+
 	"knative.dev/client/pkg/kn/plugin"
 
 	"github.com/rhuss/kn-service-log/pkg"
@@ -32,6 +34,11 @@ func (l *logPlugin) Name() string {
 
 func (l *logPlugin) Execute(args []string) error {
 	cmd := pkg.NewLogCommand()
+	oldArgs := os.Args
+	defer (func() {
+		os.Args = oldArgs
+	})()
+	os.Args = append([]string { "kn-service-log" }, args...)
 	return cmd.Execute()
 }
 
