@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2020 The Knative Authors
+# Copyright 2020
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -203,7 +203,7 @@ update_deps() {
 
 watch() {
     local command="./hack/build.sh --fast"
-    local fswatch_opts="-e \"^\..*$\" -o $SOURCE_DIRS"
+    local fswatch_opts="-se \"^\..*$\" -o $SOURCE_DIRS"
     if $(has_flag --test -t); then
       command="$command --test"
     fi
