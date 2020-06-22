@@ -20,7 +20,7 @@ import (
 	"github.com/rhuss/kn-service-log/pkg"
 )
 
-func Init() {
+func init() {
 	plugin.InternalPlugins = append(plugin.InternalPlugins, &logPlugin{})
 }
 
