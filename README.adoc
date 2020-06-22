@@ -11,6 +11,18 @@
 `kn service log SERVICE` follow the current logs of a service's running pods.
 It prints the revision and pod index prefix and works basically like _stern_
 
+Compile with 
+
+```
+./hack/builds.sh
+```
+
+then move `kn-service-log` to `~/.config/kn/plugins/` and call kn with 
+
+```
+kn sevice log mysvc &
+```
+
 _this is work in progress ..._
 // ### Description
 
