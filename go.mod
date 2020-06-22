@@ -1,4 +1,4 @@
-module rhuss/kn-service-log
+module github.com/rhuss/kn-service-log
 
 go 1.14
 
