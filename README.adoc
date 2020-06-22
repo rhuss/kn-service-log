@@ -8,10 +8,11 @@
 
 // Add a summary description here. This description should fit in a single sentence.
 
-`kn service log SERVICE` prints out the current logs of a service's pods
+`kn service log SERVICE` follow the current logs of a service's running pods.
+It prints the revision and pod index prefix and works basically like _stern_
 
-### Description
+_this is work in progress ..._
+// ### Description
 
 // A longer description which also describes the use cases that this plugin solves.
 
-....

@@ -23,13 +23,13 @@ set -o pipefail
 PLUGIN="kn-service-log"
 
 # Directories containing go code which needs to be formatted
-SOURCE_DIRS="."
+SOURCE_DIRS="cmd pkg"
 
 # Directory which should be compiled
-MAIN_SOURCE_DIR="."
+MAIN_SOURCE_DIR="cmd"
 
 # Package which holds the version variables
-VERSION_PACKAGE="rhuss/kn-service-log"
+VERSION_PACKAGE="rhuss/kn-service-log/pkg"
 
 # =================================================
 
@@ -102,7 +102,7 @@ run() {
   go_test
 
   echo "────────────────────────────────────────────"
-  ./$PLUGIN version
+  # ./$PLUGIN version
 }
 
 
@@ -203,7 +203,7 @@ update_deps() {
 
 watch() {
     local command="./hack/build.sh --fast"
-    local fswatch_opts='-e "^\..*$" -o $SOURCE_DIRS'
+    local fswatch_opts="-e \"^\..*$\" -o $SOURCE_DIRS"
     if $(has_flag --test -t); then
       command="$command --test"
     fi

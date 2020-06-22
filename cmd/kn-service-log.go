@@ -31,6 +31,8 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/klog"
+
+	"rhuss/kn-service-log/pkg"
 )
 
 func main() {
@@ -46,7 +48,7 @@ Requires a connection to a Kubernetes cluster
 
 	// Initialize Kubernetes logging system
 	klog.InitFlags(nil)
-    goflag.Parse()
+	goflag.Parse()
 	flag.CommandLine.AddGoFlagSet(goflag.CommandLine)
 
 	err := rootCmd.Execute()
@@ -94,7 +96,7 @@ func run(ctx context.Context, client corev1.PodInterface, service string) error 
 		return err
 	}
 
-	tails := make(map[string]*tail)
+	tails := make(map[string]*pkg.Tail)
 
 	go func() {
 		for p := range added {
@@ -103,10 +105,10 @@ func run(ctx context.Context, client corev1.PodInterface, service string) error 
 				continue
 			}
 
-			tail := newTail(p.namespace, p.pod,  p.podIndex, p.revision)
+			tail := pkg.NewTail(p.namespace, p.pod, p.podIndex, p.revision)
 			tails[id] = tail
 
-			tail.start(ctx, client)
+			tail.Start(ctx, client)
 		}
 	}()
 
@@ -116,7 +118,7 @@ func run(ctx context.Context, client corev1.PodInterface, service string) error 
 			if tails[id] == nil {
 				continue
 			}
-			tails[id].close()
+			tails[id].Close()
 			delete(tails, id)
 		}
 	}()

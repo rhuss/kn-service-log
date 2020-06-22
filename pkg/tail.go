@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package pkg
 
 import (
 	"bufio"
@@ -29,7 +29,7 @@ import (
 	"k8s.io/client-go/rest"
 )
 
-type tail struct {
+type Tail struct {
 	namespace     string
 	podName       string
 	revisionName  string
@@ -52,7 +52,7 @@ var colorList = []*color.Color{
 
 var defaultTemplate = "{{color .RevisionColor .RevisionName}} {{color .PodColor .PodIndex}} {{.Message}}"
 
-func newTail(namespace, podName, podIndex, revisionName string) *tail {
+func NewTail(namespace, podName, podIndex, revisionName string) *Tail {
 	podColor := randomColor(podName)
 	revisionColor := randomColor(revisionName)
 
@@ -63,7 +63,7 @@ func newTail(namespace, podName, podIndex, revisionName string) *tail {
 	}
 	tmpl := template.Must(template.New("log").Funcs(funs).Parse(defaultTemplate))
 
-	return &tail{
+	return &Tail{
 		namespace:     namespace,
 		podName:       podName,
 		podIndex:      podIndex,
@@ -75,7 +75,7 @@ func newTail(namespace, podName, podIndex, revisionName string) *tail {
 	}
 }
 
-func (t *tail) start(ctx context.Context, pod v1.PodInterface) {
+func (t *Tail) Start(ctx context.Context, pod v1.PodInterface) {
 	go func() {
 		g := color.New(color.FgHiGreen, color.Bold).SprintFunc()
 		t.printMarker(g("+"))
@@ -118,14 +118,14 @@ func (t *tail) start(ctx context.Context, pod v1.PodInterface) {
 }
 
 // close stops tailing
-func (t *tail) close() {
+func (t *Tail) Close() {
 	d := color.New(color.FgHiRed, color.Bold).SprintFunc()
 	t.printMarker(d("-"))
 	close(t.closed)
 }
 
 // print prints a color coded log message with the pod and container names
-func (t *tail) print(msg string) {
+func (t *Tail) print(msg string) {
 	vm := Log{
 		Message:       msg,
 		Namespace:     t.namespace,
@@ -141,7 +141,7 @@ func (t *tail) print(msg string) {
 	}
 }
 
-func (t *tail) printMarker(prefix string) {
+func (t *Tail) printMarker(prefix string) {
 	r := t.revisionColor.SprintFunc()
 	p := t.podColor.SprintFunc()
 	fmt.Fprintf(os.Stderr, "%s %s %s\n", prefix, r(t.revisionName), p(t.podIndex))
