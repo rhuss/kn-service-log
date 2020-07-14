@@ -29,7 +29,7 @@ func init() {
 type logPlugin struct {}
 
 func (l *logPlugin) Name() string {
-	return "kn service log"
+	return "kn-service-log"
 }
 
 func (l *logPlugin) Execute(args []string) error {
